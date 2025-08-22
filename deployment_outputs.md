@@ -428,11 +428,14 @@ kubectl get secrets -n ricplt -l owner=helm
 kubectl logs -f deployment/bouncer-xapp -n ricplt
 kubectl logs -f deployment/kpi-monitor-xapp -n ricplt
 ```
+<img width="828" height="388" alt="Screenshot from 2025-08-23 04-00-27" src="https://github.com/user-attachments/assets/9e84c86d-4dce-42a1-a319-a7a3c39fbfc7" />
 
 **Test Application Manager health endpoint**
 ```bash
 kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://localhost:8080/ric/v1/health/ready
 ```
+<img width="790" height="64" alt="Screenshot from 2025-08-23 04-07-59" src="https://github.com/user-attachments/assets/1876908a-8ab8-43af-8bec-bdbb7a657428" />
+
 
 ### Successfully Verified Components
 - ✅ **Bouncer xApp**: Full runtime logs showing active message processing
@@ -466,6 +469,7 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 - Issue resolution and systematic debugging
 
 ---
+
 
 
 
