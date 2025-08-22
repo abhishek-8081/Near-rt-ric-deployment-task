@@ -254,21 +254,24 @@ helm install bouncer-xapp helm/bouncer-xapp -n ricplt
 ### xApp Resolution Process
 
 **Set minikube Docker environment**
-```bash
+```
 eval "$(minikube docker-env)"
 ```
+<img width="563" height="31" alt="Screenshot from 2025-08-23 01-45-21" src="https://github.com/user-attachments/assets/ab1eec39-2c5f-4ddb-8270-b3b376bd7c23" />
 
 **Rebuild images within minikube context**
 ```bash
 docker build -t kpi-monitor-xapp:latest .
 docker build -t bouncer-xapp:latest .
 ```
+<img width="966" height="711" alt="Screenshot from 2025-08-23 01-49-58" src="https://github.com/user-attachments/assets/28d37ead-9230-4243-8444-eca2fd176478" />
 
 **Upgrade deployments with rebuilt images**
 ```bash
 helm upgrade kpi-monitor ~/kpi-monitor-xapp/helm/kpi-monitor-xapp -n ricplt --reuse-values
 helm upgrade bouncer-xapp ~/bouncer-xapp/helm/bouncer-xapp -n ricplt --reuse-values
 ```
+<img width="964" height="260" alt="Screenshot from 2025-08-23 01-51-39" src="https://github.com/user-attachments/assets/32015a2f-0c01-4462-a117-25d02924afbb" />
 
 ### xApp Status Output
 ```
@@ -276,6 +279,7 @@ NAME                                              READY   STATUS             RES
 bouncer-xapp-cc5b56588-tmp6w                      1/1     Running            0                7m6s
 kpi-monitor-xapp-859bb4f59b-6w86j                 0/1     Error              1 (4s ago)       13m
 ```
+<img width="747" height="161" alt="Screenshot from 2025-08-23 01-52-12" src="https://github.com/user-attachments/assets/4d1099b6-77fe-44a3-967a-53fae10f63c8" />
 
 ### Bouncer xApp Runtime Logs
 ```
@@ -287,6 +291,8 @@ INFO:__main__:Bouncer: Processed message #2
 INFO:__main__:Bouncer: Simulating load test - Random latency: 16ms
 ...
 ```
+<img width="747" height="161" alt="Screenshot from 2025-08-23 01-52-12" src="https://github.com/user-attachments/assets/7bbbe0a6-e236-423a-a23d-5c0fdb3070ca" />
+
 
 ---
 
@@ -447,3 +453,4 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 ---
 
 *Screenshots and detailed log outputs are available in the accompanying documentation files.*
+
