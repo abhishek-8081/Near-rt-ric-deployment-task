@@ -108,23 +108,24 @@
   kubectl delete secret sh.helm.release.v1.xapp-onboarder.v1 -n ricplt --ignore-not-found
   helm uninstall xapp-onboarder -n ricplt || true
   ```
+  <img width="1300" height="331" alt="Screenshot from 2025-08-23 00-23-13" src="https://github.com/user-attachments/assets/76c5c736-57e7-4984-a33b-d70c08be96de" />
+
 - Linted and updated dependencies for `xapp-onboarder` chart  
   ```bash
   helm lint ./xapp-onboarder
   helm dependency update ./xapp-onboarder
   helm repo update
   ```
+  <img width="795" height="112" alt="Screenshot from 2025-08-23 00-25-52" src="https://github.com/user-attachments/assets/47f35932-2a64-4030-9835-00e6ebd3ece5" />
+
 - Attempted fresh install of `xapp-onboarder`  
   ```bash
   helm install xapp-onboarder ./xapp-onboarder -n ricplt
   ```
+  <img width="1785" height="188" alt="Screenshot from 2025-08-23 00-29-00" src="https://github.com/user-attachments/assets/22224c41-e9ef-42b6-9bc5-23076f29a684" />
+
   *Encountered reuse/ownership errors; cleanup in progress.*
 
-<!-- Add SS for cleanup commands and lint output -->
-
 ***
-
-*Progress snapshots and additional details to be added.*
-
 
 
