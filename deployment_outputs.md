@@ -304,6 +304,8 @@ INFO:__main__:Bouncer: Simulating load test - Random latency: 16ms
 ```bash
 helm install xapp-onboarder ./xapp-onboarder -n ricplt
 ```
+<img width="1790" height="110" alt="Screenshot from 2025-08-23 03-43-40" src="https://github.com/user-attachments/assets/0d1b4034-3265-472b-8905-bcce46c88690" />
+
 
 **Clean conflicting ConfigMaps**
 ```bash
@@ -311,12 +313,14 @@ kubectl delete configmap configmap-ricplt-xapp-onboarder-env -n ricplt
 kubectl delete configmap configmap-ricplt-xapp-onboarder-chartmuseum-env -n ricplt
 helm uninstall xapp-onboarder -n ricplt
 ```
+<img width="1751" height="154" alt="Screenshot from 2025-08-23 03-45-19" src="https://github.com/user-attachments/assets/18036554-2c0f-4ed4-bc6e-1b1354f7cb10" />
 
 **Update dependencies and repositories**
 ```bash
 helm dependency update ./xapp-onboarder
 helm repo update
 ```
+<img width="1173" height="289" alt="Screenshot from 2025-08-23 03-47-23" src="https://github.com/user-attachments/assets/e7122b0c-6d7b-42ca-8081-4d3a2fd33a23" />
 
 ### xApp Onboarder Status
 - **Status**: Installation blocked by dependency issues
@@ -335,6 +339,8 @@ find ~/ric-dep -name "*e2sim*" -o -name "*simulator*"
 find ~/ric-dep -name "*e2*" -type d | grep -i sim
 ls ~/ric-dep/*/
 ```
+<img width="1640" height="545" alt="Screenshot from 2025-08-23 03-50-10" src="https://github.com/user-attachments/assets/6e64e0a4-abd3-4c8f-ba57-68a872e5d8b7" />
+
 
 ### E2 Simulator Status
 - **Status**: No dedicated E2 simulator Helm chart found
@@ -351,16 +357,21 @@ ls ~/ric-dep/*/
 ```bash
 kubectl get svc -n ricplt
 ```
+<img width="1096" height="273" alt="Screenshot from 2025-08-23 03-51-44" src="https://github.com/user-attachments/assets/123643b5-c664-407e-9695-e44f36821234" />
+
 
 **Get all resources in ricplt namespace**
 ```bash
 kubectl get all -n ricplt
 ```
+<img width="977" height="734" alt="Screenshot from 2025-08-23 03-52-54" src="https://github.com/user-attachments/assets/e5b5d2bf-429d-4e5c-96d4-b8d7766f2140" />
+
 
 **List all Helm releases**
 ```bash
 helm list -n ricplt
 ```
+<img width="1113" height="116" alt="Screenshot from 2025-08-23 03-53-24" src="https://github.com/user-attachments/assets/c5e13c4a-7e16-4698-8857-7e544eee8d5c" />
 
 ### Helm Releases Status
 ```
@@ -391,6 +402,8 @@ manifest for nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1 not found: m
 eval "$(minikube docker-env)"
 # Rebuilt images in minikube context
 ```
+<img width="510" height="24" alt="Screenshot from 2025-08-23 03-55-56" src="https://github.com/user-attachments/assets/2f11f3fe-c5ba-4239-8f56-ea25e732c49a" />
+
 **Result**: ✅ Bouncer xApp successfully running
 
 ### Issue 3: Helm Chart Dependencies
@@ -400,6 +413,8 @@ eval "$(minikube docker-env)"
 kubectl delete secret sh.helm.release.v1.xapp-onboarder.v1 -n ricplt
 kubectl get secrets -n ricplt -l owner=helm
 ```
+<img width="897" height="101" alt="Screenshot from 2025-08-23 03-57-12" src="https://github.com/user-attachments/assets/b6662051-17b3-4f46-89fb-a143b3d6b584" />
+
 **Status**: Ongoing dependency resolution needed
 
 ---
@@ -451,6 +466,7 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 - Issue resolution and systematic debugging
 
 ---
+
 
 
 
