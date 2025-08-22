@@ -349,6 +349,19 @@ Based on deployed component analysis:
 4. Protocol compliance validation tools
 
 ---
+## Screenshots
+<img width="873" height="662" alt="Screenshot from 2025-08-23 01-58-33" src="https://github.com/user-attachments/assets/24e3aec0-5f4c-42cd-b1e3-2027abfb3287" />
+<img width="480" height="103" alt="Screenshot from 2025-08-23 02-00-00" src="https://github.com/user-attachments/assets/d257e821-e21a-413d-8e50-6a0b2ceb3e48" />
+<img width="641" height="353" alt="Screenshot from 2025-08-23 02-00-28" src="https://github.com/user-attachments/assets/5807a2e9-7fb9-4ea4-bb71-6ef437d7d6c7" />
+<img width="640" height="405" alt="Screenshot from 2025-08-23 02-00-54" src="https://github.com/user-attachments/assets/9166c1c5-35eb-44fd-97d0-b1dac9a4c181" />
+<img width="793" height="207" alt="Screenshot from 2025-08-23 02-01-24" src="https://github.com/user-attachments/assets/7f711c19-0864-412f-8b27-fc1725b9cd03" />
+<img width="814" height="783" alt="Screenshot from 2025-08-23 02-01-44" src="https://github.com/user-attachments/assets/5e13af3f-532d-48a0-a067-a7fd89788511" />
+
+
+
+
+
+
 
 ## Conclusion
 
@@ -357,3 +370,5 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Current Status**: E2 simulator integration incomplete due to infrastructure and component availability limitations.
 
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
+
+
