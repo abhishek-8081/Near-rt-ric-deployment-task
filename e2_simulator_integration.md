@@ -57,16 +57,20 @@ deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl   0/1     CrashLoopBackOff   7 (
 ### Commands Executed for E2 Simulator Search
 
 #### Repository-wide Search for E2 Simulator Components
-```bash
+```
 # Search for E2 simulator files
 find ~/ric-dep -name "*e2sim*" -o -name "*simulator*" | head -10
 
 # Search for E2-related directories with simulation components
 find ~/ric-dep -name "*e2*" -type d | grep -i sim
+```
 
-# Examine repository structure for simulation components
+#### Examine repository structure for simulation components
+```
 ls ~/ric-dep/*/
 ```
+<img width="1660" height="544" alt="Screenshot from 2025-08-22 22-03-00" src="https://github.com/user-attachments/assets/2b1ea5a5-7d79-47e9-b270-8345c5c334d5" />
+
 
 **Search Results:**
 - No dedicated E2 simulator Helm charts found
@@ -138,7 +142,7 @@ Error response from daemon: manifest for nexus3.o-ran-sc.org:10002/o-ran-sc/ric-
 ```
 
 #### Registry Authentication Issues
-```bash
+```
 # Attempted secret creation for private registry access
 kubectl create secret docker-registry <secret-name> \
   --docker-server=nexus3.o-ran-sc.org:10002 \
@@ -146,6 +150,8 @@ kubectl create secret docker-registry <secret-name> \
   --docker-password=<your-password> \
   --docker-email=<your-email> -n ricplt
 ```
+<img width="869" height="114" alt="Screenshot from 2025-08-22 21-59-27" src="https://github.com/user-attachments/assets/f4de2364-c2a2-4411-ae04-91759077baf6" />
+
 
 **Result**: Commands failed due to missing credentials for O-RAN SC private registry
 
@@ -319,5 +325,6 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
 
 ***
+
 
 
