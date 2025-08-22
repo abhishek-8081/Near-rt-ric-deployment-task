@@ -32,6 +32,7 @@ docker run hello-world
 minikube delete  # Clean previous cluster
 ```
 <img width="729" height="100" alt="Screenshot from 2025-08-22 16-18-35" src="https://github.com/user-attachments/assets/e5345374-89af-4967-8ed5-6ece4c989177" />
+
 ```
 minikube start --driver=docker --memory=3072 --cpus=4 --disk-size=20g
 ```
@@ -45,23 +46,16 @@ kubectl get nodes
 
 
 
-### Setup Command Output
-```
-NAME       STATUS   ROLES           AGE   VERSION
-minikube   Ready    control-plane   19s   v1.33.1
-```
-
-***
-
 ## 1. Near-RT RIC Platform Deployment
 
 ### Commands Executed
-```
+
 # Repository setup
 ```
 cd ~/ric-dep/helm
 ```
 <img width="974" height="54" alt="Screenshot from 2025-08-22 18-10-35" src="https://github.com/user-attachments/assets/d49878f6-4d2e-4570-8f59-59ea6389e149" />
+
 ```
 ls -l ~/ric-dep/new-installer/helm/charts/
 ```
@@ -78,16 +72,18 @@ helm install nearrtric ~/ric-dep/new-installer/helm/charts/nearrtric -n ricplt -
 
 
 ### Deployment Status Verification
-```
+
 # Continuous monitoring of pod status
 ```
 kubectl get pods -n ricplt
 ```
 <img width="920" height="149" alt="Screenshot from 2025-08-22 18-20-49" src="https://github.com/user-attachments/assets/82da87e6-b85c-4713-af52-ecaee067e59f" />
+
 ```
 kubectl describe pod deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 ```
 <img width="1595" height="812" alt="Screenshot from 2025-08-22 18-22-59" src="https://github.com/user-attachments/assets/bb912130-cec6-4854-99ed-c07f31e847ca" />
+
 ```
 kubectl describe pod deployment-ricplt-rtmgr-677cfb9dd7-zgrqc -n ricplt
 ```
@@ -402,5 +398,6 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 *Screenshots and detailed log outputs are available in the accompanying documentation files.*
 
 ***
+
 
 
