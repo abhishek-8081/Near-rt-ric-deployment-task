@@ -1,7 +1,7 @@
-# Near-RT RIC Platform Deployment Task Documentation
+# Near-RT RIC Platform Deployment - Task Submission
 
 ## Overview
-This repository contains the documentation for the deployment of the Near-RT-RIC platform (recent release), one xApp, and as a bonus the E2 simulator integration. 
+This repository contains the output documentation for the deployment of the Near-RT-RIC platform (recent release), one xApp, and also was able to work on the bonus, i.e., the E2 simulator integration. 
 The documentation includes pod and service outputs, API call results, issues encountered, and troubleshooting steps I faced.
 
 ---
@@ -62,7 +62,6 @@ See [work_progress.md](./work_progress.md)
 ## Submission
 Please find the deployment outputs, issues, and progress logs documented in the linked markdown files above.
 
-Submitted by: [Your Name]
-Contact: srao@linuxfoundation.org
+Submitted by: Abhishek Kumar 
+Email: abhishekrajputji2004@gmail.com
 
-Date: August 22, 2025
