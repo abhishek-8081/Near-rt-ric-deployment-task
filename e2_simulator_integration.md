@@ -77,15 +77,15 @@ ls ~/ric-dep/*/
 - No standalone E2 simulator deployment files discovered
 - E2-related components present only as part of platform deployment
 
-#### Repository Structure Analysis
+## Repository Structure Analysis
 
-# Examined directories for potential E2 simulator components
+#### Examined directories for potential E2 simulator components
 ```
 ls ~/ric-dep/helm/
 ```
 <img width="1697" height="56" alt="Screenshot from 2025-08-22 20-41-11" src="https://github.com/user-attachments/assets/c78e1382-bfac-4c83-b9f4-5cf2ce5e3e2a" />
 
-# Output showed: e2mgr, e2term (as platform components)
+Output showed: e2mgr, e2term (as platform components)
 
 # Checked for simulator-specific configurations
 ```
@@ -94,13 +94,16 @@ ls ~/ric-dep/RECIPE_EXAMPLE/ | grep -i sim
 <img width="817" height="56" alt="Screenshot from 2025-08-22 20-42-30" src="https://github.com/user-attachments/assets/bfba7c8d-3a5e-474c-bda9-2e3ed1a176a5" />
 
 # No simulator-specific recipe files found
-```
 
 ### Repository Content Analysis
 
 **Available E2-Related Components:**
+```
 - `~/ric-dep/helm/e2mgr/` - E2 Manager Helm chart
 - `~/ric-dep/helm/e2term/` - E2 Termination Helm chart
+```
+<img width="619" height="123" alt="Screenshot from 2025-08-22 22-12-52" src="https://github.com/user-attachments/assets/9e84fe05-1ce0-4c37-beb7-48ad258d4edf" />
+
 - No standalone simulator components identified
 
 ***
@@ -140,6 +143,8 @@ configmap-ricplt-dbaas-appconfig
 Failed to pull image "nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1": 
 Error response from daemon: manifest for nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1 not found: manifest unknown: manifest unknown
 ```
+<img width="1784" height="241" alt="Screenshot from 2025-08-22 22-30-46" src="https://github.com/user-attachments/assets/2a6964fe-4c0f-40f4-8483-fead39045315" />
+
 
 #### Registry Authentication Issues
 ```
@@ -158,7 +163,7 @@ kubectl create secret docker-registry <secret-name> \
 ### Secondary Issue: Missing Dedicated E2 Simulator
 
 #### Alternative Integration Attempts
-```bash
+```
 # Attempted to locate external E2 simulator
 git clone https://github.com/o-ran-sc/hello-world-xapp.git ~/hello-world-xapp
 
@@ -166,6 +171,8 @@ git clone https://github.com/o-ran-sc/hello-world-xapp.git ~/hello-world-xapp
 Username for 'https://github.com': abhishek-8081
 remote: Invalid username or token. Password authentication is not supported for Git operations.
 ```
+<img width="1013" height="111" alt="Screenshot from 2025-08-22 22-34-26" src="https://github.com/user-attachments/assets/21a32738-bd28-433c-97c6-d919477a1a1e" />
+
 
 **Result**: Unable to access O-RAN SC repositories for additional E2 simulation components
 
@@ -325,6 +332,7 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
 
 ***
+
 
 
 
