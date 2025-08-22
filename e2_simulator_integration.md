@@ -223,6 +223,8 @@ kubectl get svc -n ricplt | grep e2
 kubectl logs deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 kubectl logs deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl -n ricplt
 ```
+<img width="694" height="65" alt="Screenshot from 2025-08-22 22-43-00" src="https://github.com/user-attachments/assets/f7fa2daf-e0a9-4aee-89c3-04e23b1e723f" />
+
 
 **Result**: Unable to retrieve logs due to ImagePullBackOff and CrashLoopBackOff states
 
@@ -332,6 +334,7 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
 
 ***
+
 
 
 
