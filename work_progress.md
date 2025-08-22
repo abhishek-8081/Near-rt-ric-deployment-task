@@ -48,16 +48,20 @@
   mkdir -p helm/kpi-monitor-xapp/templates
   # Created Chart.yaml, values.yaml, deployment.yaml
   ```
+  <img width="877" height="603" alt="Screenshot from 2025-08-22 23-56-55" src="https://github.com/user-attachments/assets/03da1b6b-0a66-44d2-8f36-f1ee579a88d6" />
+
 - Built and tagged Docker image locally  
   ```bash
   docker build -t kpi-monitor-xapp:latest .
   ```
+  <img width="853" height="486" alt="Screenshot from 2025-08-22 23-58-03" src="https://github.com/user-attachments/assets/48b0fdc4-e6d8-4451-b24f-5134c6a39d3e" />
+
 - Installed via Helm into `ricplt` namespace  
   ```bash
   helm install kpi-monitor helm/kpi-monitor-xapp -n ricplt --create-namespace
   kubectl get pods -n ricplt
   ```
-<!-- Add SS for kpi-monitor-xapp deployment -->
+  <img width="853" height="486" alt="Screenshot from 2025-08-22 23-58-03" src="https://github.com/user-attachments/assets/0d852b99-e4fd-4c48-9f19-8760f0842dc3" />
 
 ## 4. Developed & Deployed Bouncer xApp
 
@@ -68,15 +72,21 @@
   mkdir -p helm/bouncer-xapp/templates
   # Created Chart.yaml, values.yaml, deployment.yaml
   ```
+  <img width="983" height="817" alt="Screenshot from 2025-08-23 00-01-52" src="https://github.com/user-attachments/assets/495f9812-adc3-471d-a2cb-30869841ad66" />
+
 - Built and tagged Docker image locally  
   ```bash
   docker build -t bouncer-xapp:latest .
   ```
+  <img width="846" height="346" alt="Screenshot from 2025-08-23 00-03-02" src="https://github.com/user-attachments/assets/58fe680a-86a4-4ccd-9664-24c013ed16be" />
+
 - Installed via Helm into `ricplt` namespace  
   ```bash
   helm install bouncer-xapp helm/bouncer-xapp -n ricplt
   kubectl get pods -n ricplt
   ```
+  <img width="1058" height="316" alt="Screenshot from 2025-08-23 00-03-38" src="https://github.com/user-attachments/assets/3e1f2164-47e1-410a-a06b-eb3e804571ad" />
+
 - Resolved image pull issues by using Minikube Docker environment  
   ```bash
   eval "$(minikube docker-env)"
@@ -85,7 +95,7 @@
   helm upgrade bouncer-xapp ~/bouncer-xapp/helm/bouncer-xapp -n ricplt --reuse-values
   kubectl get pods -n ricplt
   ```
-<!-- Add SS for bouncer-xapp logs and status -->
+  <img width="1351" height="498" alt="Screenshot from 2025-08-23 00-05-19" src="https://github.com/user-attachments/assets/93696cf8-7791-4c66-a051-27057fc6c458" />
 
 ## 5. Chart Cleanup and Retry
 
@@ -115,5 +125,6 @@
 ***
 
 *Progress snapshots and additional details to be added.*
+
 
 
