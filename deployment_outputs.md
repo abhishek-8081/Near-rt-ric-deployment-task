@@ -99,6 +99,8 @@ deployment-ricplt-rtmgr-677cfb9dd7-zgrqc          0/1     ImagePullBackOff   0  
 deployment-ricplt-submgr-7f885656cb-mcgnv         1/1     Running            0             16m
 statefulset-ricplt-dbaas-server-0                 1/1     Running            0             16m
 ```
+<img width="956" height="169" alt="Screenshot from 2025-08-22 20-13-35" src="https://github.com/user-attachments/assets/c171cfb6-279f-4210-9c31-d0b395966b07" />
+
 
 ### Successfully Deployed Core Components
 - ✅ **Application Manager** (deployment-ricplt-appmgr): Running
@@ -285,7 +287,7 @@ helm repo update
 ## 4. E2 Simulator Integration
 
 ### Commands Executed
-```bash
+```
 # Search for E2 simulator components
 find ~/ric-dep -name "*e2sim*" -o -name "*simulator*"
 find ~/ric-dep -name "*e2*" -type d | grep -i sim
@@ -302,7 +304,7 @@ ls ~/ric-dep/*/
 ## 5. Services and Network Status
 
 ### Services Verification Commands
-```bash
+```
 kubectl get svc -n ricplt
 kubectl get all -n ricplt
 helm list -n ricplt
@@ -398,6 +400,7 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 *Screenshots and detailed log outputs are available in the accompanying documentation files.*
 
 ***
+
 
 
 
