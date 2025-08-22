@@ -14,18 +14,36 @@ This document captures the complete deployment process, commands executed, and o
 - **Resource Allocation**: 3GB RAM, 4 CPUs, 20GB disk
 
 ### Initial Setup Commands Executed
-```bash
+
 # Docker verification
+```
 docker --version
+```
+<img width="581" height="41" alt="Docker_version" src="https://github.com/user-attachments/assets/d2bc2148-24de-4d4e-bb97-5501ce4178fb" />
+
+```
 docker run hello-world
+```
+<img width="939" height="512" alt="Docker Run Hello World" src="https://github.com/user-attachments/assets/98eaa9dc-3a18-4c0a-85b2-84eeb9c62f17" />
+
 
 # Minikube cluster setup
+```
 minikube delete  # Clean previous cluster
+```
+<img width="729" height="100" alt="Screenshot from 2025-08-22 16-18-35" src="https://github.com/user-attachments/assets/e5345374-89af-4967-8ed5-6ece4c989177" />
+```
 minikube start --driver=docker --memory=3072 --cpus=4 --disk-size=20g
+```
+<img width="1540" height="359" alt="Screenshot from 2025-08-22 16-19-20" src="https://github.com/user-attachments/assets/8b4fcea5-29c9-45a9-9ce9-f4da54f9ebee" />
 
 # Cluster verification
+```
 kubectl get nodes
 ```
+<img width="870" height="57" alt="Screenshot from 2025-08-22 16-20-22" src="https://github.com/user-attachments/assets/a9497a3b-65f0-43b4-abbd-a603ab8174ef" />
+
+
 
 ### Setup Command Output
 ```
@@ -38,23 +56,42 @@ minikube   Ready    control-plane   19s   v1.33.1
 ## 1. Near-RT RIC Platform Deployment
 
 ### Commands Executed
-```bash
+```
 # Repository setup
+```
 cd ~/ric-dep/helm
+```
+<img width="974" height="54" alt="Screenshot from 2025-08-22 18-10-35" src="https://github.com/user-attachments/assets/d49878f6-4d2e-4570-8f59-59ea6389e149" />
+```
 ls -l ~/ric-dep/new-installer/helm/charts/
+```
+<img width="819" height="100" alt="Screenshot from 2025-08-22 18-11-33" src="https://github.com/user-attachments/assets/5ab9584b-80bd-4d2e-85e6-d66b1def239b" />
+
+
 
 # Platform deployment
+```
 kubectl create namespace ricxapp  # Required namespace
 helm install nearrtric ~/ric-dep/new-installer/helm/charts/nearrtric -n ricplt --create-namespace
 ```
+<img width="1235" height="239" alt="Screenshot from 2025-08-22 18-14-31" src="https://github.com/user-attachments/assets/c6244172-9478-4798-a105-232a074d687d" />
+
 
 ### Deployment Status Verification
-```bash
+```
 # Continuous monitoring of pod status
+```
 kubectl get pods -n ricplt
+```
+<img width="920" height="149" alt="Screenshot from 2025-08-22 18-20-49" src="https://github.com/user-attachments/assets/82da87e6-b85c-4713-af52-ecaee067e59f" />
+```
 kubectl describe pod deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
+```
+<img width="1595" height="812" alt="Screenshot from 2025-08-22 18-22-59" src="https://github.com/user-attachments/assets/bb912130-cec6-4854-99ed-c07f31e847ca" />
+```
 kubectl describe pod deployment-ricplt-rtmgr-677cfb9dd7-zgrqc -n ricplt
 ```
+<img width="1564" height="774" alt="Screenshot from 2025-08-22 18-23-45" src="https://github.com/user-attachments/assets/bf7f77c4-fa2a-4e8a-9f06-e8913650a86f" />
 
 ### Platform Pods Status Output
 ```
@@ -82,10 +119,13 @@ statefulset-ricplt-dbaas-server-0                 1/1     Running            0  
 ### KPI Monitor xApp
 
 #### Commands Executed
-```bash
+```
 # Create application structure
+```
 mkdir ~/kpi-monitor-xapp
 cd ~/kpi-monitor-xapp
+```
+<img width="524" height="43" alt="Screenshot from 2025-08-22 18-29-07" src="https://github.com/user-attachments/assets/d17b2799-6927-43c9-a8db-dabf99aa128a" />
 
 # Create Python application
 cat > app.py << 'EOF'
@@ -112,6 +152,9 @@ if __name__ == "__main__":
     app.start()
 EOF
 
+<img width="524" height="43" alt="Screenshot from 2025-08-22 18-29-07" src="https://github.com/user-attachments/assets/c1211655-7928-4f2d-89b0-f50afb5267c9" />
+
+
 # Create Docker configuration
 cat > Dockerfile << 'EOF'
 FROM python:3.8-slim
@@ -120,8 +163,21 @@ COPY app.py .
 CMD ["python", "app.py"]
 EOF
 
+<img width="634" height="115" alt="Screenshot from 2025-08-22 18-31-15" src="https://github.com/user-attachments/assets/9fd839ec-643b-4c13-a993-bc2010b05fb5" />
+
+
 # Create Helm chart structure
+```
 mkdir -p helm/kpi-monitor-xapp/templates
+cat > helm/kpi-monitor-xapp/chart.yaml<<'EOF'
+```
+<img width="946" height="146" alt="Screenshot from 2025-08-22 18-33-53" src="https://github.com/user-attachments/assets/9039cdd6-ea68-4fa8-ba71-7a4a3f180435" />
+
+```
+cat >helm/kpi-monitor-xapp/values.yaml<<'EOF'
+cat >helm/kpi-monitor-xapp/templates/deployents.yaml<<'EOF'
+```
+<img width="946" height="146" alt="Screenshot from 2025-08-22 18-33-53" src="https://github.com/user-attachments/assets/01dc76e7-b1ad-4dbe-9073-72a0247b9d1d" />
 
 # Build and deploy
 docker build -t kpi-monitor-xapp:latest .
@@ -346,4 +402,5 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 *Screenshots and detailed log outputs are available in the accompanying documentation files.*
 
 ***
+
 
