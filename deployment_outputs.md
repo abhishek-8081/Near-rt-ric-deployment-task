@@ -222,9 +222,12 @@ if __name__ == "__main__":
 EOF
 
 # Build and deploy
+```
 docker build -t bouncer-xapp:latest .
 helm install bouncer-xapp helm/bouncer-xapp -n ricplt
 ```
+<img width="930" height="342" alt="Screenshot from 2025-08-22 20-16-53" src="https://github.com/user-attachments/assets/3606075e-268f-4178-9091-858c1396f504" />
+
 
 ### xApp Resolution Process
 ```bash
@@ -400,6 +403,7 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 *Screenshots and detailed log outputs are available in the accompanying documentation files.*
 
 ***
+
 
 
 
