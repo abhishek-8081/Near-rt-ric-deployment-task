@@ -2,7 +2,7 @@
 
 This document outlines the E2 simulator integration attempts during the Near-RT RIC platform deployment. The focus was on identifying, deploying, and configuring E2 simulation components to enable testing of the RIC platform's E2 interface functionality.
 
-***
+---
 
 ## E2 Components Status in Near-RT RIC Platform
 
@@ -11,11 +11,13 @@ This document outlines the E2 simulator integration attempts during the Near-RT 
 The Near-RT RIC platform deployment included several E2-related components:
 
 #### E2 Manager (E2MGR)
-```
+
+**Inspect E2 Manager pod configuration**
+```bash
 kubectl describe pod deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 ```
-<img width="1594" height="763" alt="Screenshot from 2025-08-22 20-23-10" src="https://github.com/user-attachments/assets/19bcce6d-396a-48f6-b149-e00768f8ca24" />
 
+<img width="1594" height="763" alt="Screenshot from 2025-08-22 20-23-10" src="https://github.com/user-attachments/assets/19bcce6d-396a-48f6-b149-e00768f8ca24" />
 
 **Component Details:**
 - **Pod Name**: deployment-ricplt-e2mgr-6dbf74545f-8w7pd
@@ -33,11 +35,13 @@ Reason: ImagePullBackOff
 ```
 
 #### E2 Termination (E2TERM)
-```
+
+**Inspect E2 Termination pod configuration**
+```bash
 kubectl describe pod deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl -n ricplt
 ```
-<img width="1181" height="785" alt="Screenshot from 2025-08-22 20-25-27" src="https://github.com/user-attachments/assets/13688a5c-e28d-4815-8747-d17d2d015158" />
 
+<img width="1181" height="785" alt="Screenshot from 2025-08-22 20-25-27" src="https://github.com/user-attachments/assets/13688a5c-e28d-4815-8747-d17d2d015158" />
 
 **Component Details:**
 - **Pod Name**: deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl
@@ -50,27 +54,32 @@ NAME                                              READY   STATUS             RES
 deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl   0/1     CrashLoopBackOff   7 (62s ago)   16m
 ```
 
-***
+---
 
 ## E2 Simulator Discovery and Search Efforts
 
 ### Commands Executed for E2 Simulator Search
 
 #### Repository-wide Search for E2 Simulator Components
-```
-# Search for E2 simulator files
-find ~/ric-dep -name "*e2sim*" -o -name "*simulator*" | head -10
 
-# Search for E2-related directories with simulation components
+**Search for E2 simulator files in repository**
+```bash
+find ~/ric-dep -name "*e2sim*" -o -name "*simulator*" | head -10
+```
+
+**Search for E2-related directories with simulation components**
+```bash
 find ~/ric-dep -name "*e2*" -type d | grep -i sim
 ```
 
 #### Examine repository structure for simulation components
-```
+
+**List repository directory contents**
+```bash
 ls ~/ric-dep/*/
 ```
-<img width="1660" height="544" alt="Screenshot from 2025-08-22 22-03-00" src="https://github.com/user-attachments/assets/2b1ea5a5-7d79-47e9-b270-8345c5c334d5" />
 
+<img width="1660" height="544" alt="Screenshot from 2025-08-22 22-03-00" src="https://github.com/user-attachments/assets/2b1ea5a5-7d79-47e9-b270-8345c5c334d5" />
 
 **Search Results:**
 - No dedicated E2 simulator Helm charts found
@@ -80,20 +89,24 @@ ls ~/ric-dep/*/
 ## Repository Structure Analysis
 
 #### Examined directories for potential E2 simulator components
-```
+
+**Check helm directory for E2 components**
+```bash
 ls ~/ric-dep/helm/
 ```
+
 <img width="1697" height="56" alt="Screenshot from 2025-08-22 20-41-11" src="https://github.com/user-attachments/assets/c78e1382-bfac-4c83-b9f4-5cf2ce5e3e2a" />
 
 Output showed: e2mgr, e2term (as platform components)
 
-# Checked for simulator-specific configurations
-```
+**Check for simulator-specific configurations**
+```bash
 ls ~/ric-dep/RECIPE_EXAMPLE/ | grep -i sim
 ```
+
 <img width="817" height="56" alt="Screenshot from 2025-08-22 20-42-30" src="https://github.com/user-attachments/assets/bfba7c8d-3a5e-474c-bda9-2e3ed1a176a5" />
 
-# No simulator-specific recipe files found
+No simulator-specific recipe files found
 
 ### Repository Content Analysis
 
@@ -102,11 +115,12 @@ ls ~/ric-dep/RECIPE_EXAMPLE/ | grep -i sim
 - `~/ric-dep/helm/e2mgr/` - E2 Manager Helm chart
 - `~/ric-dep/helm/e2term/` - E2 Termination Helm chart
 ```
+
 <img width="619" height="123" alt="Screenshot from 2025-08-22 22-12-52" src="https://github.com/user-attachments/assets/9e84fe05-1ce0-4c37-beb7-48ad258d4edf" />
 
 - No standalone simulator components identified
 
-***
+---
 
 ## E2 Interface Components Configuration
 
@@ -127,12 +141,12 @@ configmap-ricplt-dbaas-appconfig
 
 ### E2 Termination Configuration
 
-**Container Command:** `/run_rtmgr.sh`
+**Container Command:** `/run_rtmgr.sh`  
 **Health Check Endpoints:**
 - Alive: `http://:8080/ric/v1/health/alive`
 - Ready: `http://:8080/ric/v1/health/ready`
 
-***
+---
 
 ## Integration Issues and Challenges
 
@@ -143,40 +157,44 @@ configmap-ricplt-dbaas-appconfig
 Failed to pull image "nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1": 
 Error response from daemon: manifest for nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1 not found: manifest unknown: manifest unknown
 ```
+
 <img width="1784" height="241" alt="Screenshot from 2025-08-22 22-30-46" src="https://github.com/user-attachments/assets/2a6964fe-4c0f-40f4-8483-fead39045315" />
 
-
 #### Registry Authentication Issues
-```
-# Attempted secret creation for private registry access
+
+**Attempt to create registry access secret**
+```bash
 kubectl create secret docker-registry <secret-name> \
   --docker-server=nexus3.o-ran-sc.org:10002 \
   --docker-username=<your-username> \
   --docker-password=<your-password> \
   --docker-email=<your-email> -n ricplt
 ```
-<img width="869" height="114" alt="Screenshot from 2025-08-22 21-59-27" src="https://github.com/user-attachments/assets/f4de2364-c2a2-4411-ae04-91759077baf6" />
 
+<img width="869" height="114" alt="Screenshot from 2025-08-22 21-59-27" src="https://github.com/user-attachments/assets/f4de2364-c2a2-4411-ae04-91759077baf6" />
 
 **Result**: Commands failed due to missing credentials for O-RAN SC private registry
 
 ### Secondary Issue: Missing Dedicated E2 Simulator
 
 #### Alternative Integration Attempts
-```
-# Attempted to locate external E2 simulator
-git clone https://github.com/o-ran-sc/hello-world-xapp.git ~/hello-world-xapp
 
-# Multiple authentication failures
+**Attempt to locate external E2 simulator**
+```bash
+git clone https://github.com/o-ran-sc/hello-world-xapp.git ~/hello-world-xapp
+```
+
+Multiple authentication failures:
+```
 Username for 'https://github.com': abhishek-8081
 remote: Invalid username or token. Password authentication is not supported for Git operations.
 ```
-<img width="1013" height="111" alt="Screenshot from 2025-08-22 22-34-26" src="https://github.com/user-attachments/assets/21a32738-bd28-433c-97c6-d919477a1a1e" />
 
+<img width="1013" height="111" alt="Screenshot from 2025-08-22 22-34-26" src="https://github.com/user-attachments/assets/21a32738-bd28-433c-97c6-d919477a1a1e" />
 
 **Result**: Unable to access O-RAN SC repositories for additional E2 simulation components
 
-***
+---
 
 ## Technical Analysis and Findings
 
@@ -200,35 +218,41 @@ Based on deployed components analysis:
 2. **E2 Test Harness**: No integrated testing framework discovered
 3. **RAN Simulator Integration**: No obvious integration with RAN simulation tools
 
-***
+---
 
 ## Monitoring and Verification Commands
 
 ### E2 Component Status Monitoring
-```bash
-# Continuous monitoring of E2 components
-kubectl get pods -n ricplt | grep e2
 
-# Detailed pod inspection
+**Monitor E2 component pod status**
+```bash
+kubectl get pods -n ricplt | grep e2
+```
+
+**Detailed pod inspection for troubleshooting**
+```bash
 kubectl describe pod deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 kubectl describe pod deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl -n ricplt
+```
 
-# Check E2-related services
+**Check E2-related services**
+```bash
 kubectl get svc -n ricplt | grep e2
 ```
 
 ### Log Analysis Attempts
+
+**Attempt to access E2 component logs**
 ```bash
-# Attempted to access E2 component logs
 kubectl logs deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 kubectl logs deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl -n ricplt
 ```
-<img width="694" height="65" alt="Screenshot from 2025-08-22 22-43-00" src="https://github.com/user-attachments/assets/f7fa2daf-e0a9-4aee-89c3-04e23b1e723f" />
 
+<img width="694" height="65" alt="Screenshot from 2025-08-22 22-43-00" src="https://github.com/user-attachments/assets/f7fa2daf-e0a9-4aee-89c3-04e23b1e723f" />
 
 **Result**: Unable to retrieve logs due to ImagePullBackOff and CrashLoopBackOff states
 
-***
+---
 
 ## E2 Simulator Integration Status
 
@@ -248,28 +272,29 @@ kubectl logs deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl -n ricplt
 3. **Documentation Gap**: Limited documentation for E2 simulator integration
 4. **Authentication Requirements**: Private registry requires O-RAN SC credentials
 
-***
+---
 
 ## Alternative Integration Approaches
 
 ### Potential Solutions Investigated
 
 #### 1. External E2 Simulator Integration
+
+**Attempted repository cloning for external simulators**
 ```bash
-# Attempted repository cloning for external simulators
 git clone https://github.com/o-ran-sc/hello-world-xapp.git
 ```
 **Status**: Failed due to repository access issues
 
 #### 2. Custom E2 Simulator Development
-**Approach**: Create minimal E2 protocol simulator
+**Approach**: Create minimal E2 protocol simulator  
 **Status**: Would require substantial development effort
 
 #### 3. Mock E2 Interface Implementation
-**Approach**: Implement mock E2 responses for testing
+**Approach**: Implement mock E2 responses for testing  
 **Status**: Feasible but limited functionality
 
-***
+---
 
 ## Recommendations for E2 Simulator Integration
 
@@ -301,7 +326,7 @@ git clone https://github.com/o-ran-sc/hello-world-xapp.git
    - Add E2 interface testing to deployment pipeline
    - Implement automated E2 simulator deployment
 
-***
+---
 
 ## Technical Specifications
 
@@ -323,7 +348,7 @@ Based on deployed component analysis:
 3. Network connectivity configuration
 4. Protocol compliance validation tools
 
-***
+---
 
 ## Conclusion
 
@@ -332,10 +357,3 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Current Status**: E2 simulator integration incomplete due to infrastructure and component availability limitations.
 
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
-
-***
-
-
-
-
-
