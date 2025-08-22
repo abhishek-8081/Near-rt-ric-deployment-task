@@ -8,11 +8,11 @@ The documentation includes pod and service outputs, API call results, issues enc
 
 ## Table of Contents
 
-- [Deployment Outputs](./deployment_outputs.md)
-- [xApp Deployment](./xapp_deployment.md)
-- [E2 Simulator Integration (Optional)](./e2_simulator_integration.md)
-- [Issues and Fixes](./issues_and_fixes.md)
-- [Work Progress](./work_progress.md)
+- [Deployment Outputs](deployment_outputs.md)
+- [xApp Deployment](xapp_deployment.md)
+- [E2 Simulator Integration (Optional)](e2_simulator_integration.md)
+- [Issues and Fixes](issues_and_fixes.md)
+- [Work Progress](work_progress.md)
 
 ---
 
