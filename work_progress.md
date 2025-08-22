@@ -7,13 +7,15 @@
   docker --version
   docker run hello-world
   ```
+  <img width="880" height="550" alt="Screenshot from 2025-08-22 23-39-24" src="https://github.com/user-attachments/assets/49704c66-0f9e-4a92-9937-72a9bb03d8a3" />
+
 - Cleaned up and started Minikube with Docker driver  
   ```bash
   minikube delete
   minikube start --driver=docker --memory=3072 --cpus=4 --disk-size=20g
   kubectl get nodes
   ```
-<!-- Add SS for Docker & Minikube setup -->
+  <img width="1417" height="527" alt="Screenshot from 2025-08-22 23-40-49" src="https://github.com/user-attachments/assets/0d94bf2c-2396-4273-991a-8e91575a40bb" />
 
 ## 2. Deployed Near-RT RIC Platform Chart
 
@@ -28,12 +30,14 @@
   ```bash
   kubectl create secret docker-registry nexus3-secret \
     --docker-server=nexus3.o-ran-sc.org:10002 \
-    --docker-username=<your-username> \
-    --docker-password=<your-password> \
-    --docker-email=<your-email> \
+    --docker-username=abhi \
+    --docker-password=xyz \
+    --docker-email=abhishekrajputji2004@gmail.com \
     -n ricplt
   ```
-<!-- Add SS for nearrtric pods status -->
+  <img width="869" height="130" alt="Screenshot from 2025-08-22 23-45-04" src="https://github.com/user-attachments/assets/b106c53c-2fe9-4768-affa-87e0b908144f" />
+  
+  <img width="940" height="209" alt="Screenshot from 2025-08-22 23-48-56" src="https://github.com/user-attachments/assets/9e6ef7ce-d7d1-44af-a127-9b6be7e40f0c" />
 
 ## 3. Developed & Deployed KPI Monitor xApp
 
@@ -111,4 +115,5 @@
 ***
 
 *Progress snapshots and additional details to be added.*
+
 
