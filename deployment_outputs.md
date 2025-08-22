@@ -2,7 +2,7 @@
 
 This document captures the complete deployment process, commands executed, and outputs observed during the Near-RT RIC platform deployment task. All outputs and status information documented here represent actual system states achieved during the deployment process.
 
-***
+---
 
 ## Environment Setup and Initial Configuration
 
@@ -15,78 +15,90 @@ This document captures the complete deployment process, commands executed, and o
 
 ### Initial Setup Commands Executed
 
-# Docker verification
-```
+**Verify Docker installation**
+```bash
 docker --version
 ```
+
 <img width="581" height="41" alt="Docker_version" src="https://github.com/user-attachments/assets/d2bc2148-24de-4d4e-bb97-5501ce4178fb" />
 
-```
+**Test Docker functionality**
+```bash
 docker run hello-world
 ```
+
 <img width="939" height="512" alt="Docker Run Hello World" src="https://github.com/user-attachments/assets/98eaa9dc-3a18-4c0a-85b2-84eeb9c62f17" />
 
+**Clean previous minikube cluster**
+```bash
+minikube delete
+```
 
-# Minikube cluster setup
-```
-minikube delete  # Clean previous cluster
-```
 <img width="729" height="100" alt="Screenshot from 2025-08-22 16-18-35" src="https://github.com/user-attachments/assets/e5345374-89af-4967-8ed5-6ece4c989177" />
 
-```
+**Start minikube cluster with resource allocation**
+```bash
 minikube start --driver=docker --memory=3072 --cpus=4 --disk-size=20g
 ```
+
 <img width="1540" height="359" alt="Screenshot from 2025-08-22 16-19-20" src="https://github.com/user-attachments/assets/8b4fcea5-29c9-45a9-9ce9-f4da54f9ebee" />
 
-# Cluster verification
-```
+**Verify cluster nodes**
+```bash
 kubectl get nodes
 ```
+
 <img width="870" height="57" alt="Screenshot from 2025-08-22 16-20-22" src="https://github.com/user-attachments/assets/a9497a3b-65f0-43b4-abbd-a603ab8174ef" />
 
-
+---
 
 ## 1. Near-RT RIC Platform Deployment
 
 ### Commands Executed
 
-# Repository setup
-```
+**Navigate to helm directory**
+```bash
 cd ~/ric-dep/helm
 ```
+
 <img width="974" height="54" alt="Screenshot from 2025-08-22 18-10-35" src="https://github.com/user-attachments/assets/d49878f6-4d2e-4570-8f59-59ea6389e149" />
 
-```
+**List available helm charts**
+```bash
 ls -l ~/ric-dep/new-installer/helm/charts/
 ```
+
 <img width="819" height="100" alt="Screenshot from 2025-08-22 18-11-33" src="https://github.com/user-attachments/assets/5ab9584b-80bd-4d2e-85e6-d66b1def239b" />
 
-
-
-# Platform deployment
-```
-kubectl create namespace ricxapp  # Required namespace
+**Create required namespace and deploy platform**
+```bash
+kubectl create namespace ricxapp
 helm install nearrtric ~/ric-dep/new-installer/helm/charts/nearrtric -n ricplt --create-namespace
 ```
-<img width="1235" height="239" alt="Screenshot from 2025-08-22 18-14-31" src="https://github.com/user-attachments/assets/c6244172-9478-4798-a105-232a074d687d" />
 
+<img width="1235" height="239" alt="Screenshot from 2025-08-22 18-14-31" src="https://github.com/user-attachments/assets/c6244172-9478-4798-a105-232a074d687d" />
 
 ### Deployment Status Verification
 
-# Continuous monitoring of pod status
-```
+**Monitor pod deployment status**
+```bash
 kubectl get pods -n ricplt
 ```
+
 <img width="920" height="149" alt="Screenshot from 2025-08-22 18-20-49" src="https://github.com/user-attachments/assets/82da87e6-b85c-4713-af52-ecaee067e59f" />
 
-```
+**Debug E2 Manager pod issues**
+```bash
 kubectl describe pod deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 ```
+
 <img width="1595" height="812" alt="Screenshot from 2025-08-22 18-22-59" src="https://github.com/user-attachments/assets/bb912130-cec6-4854-99ed-c07f31e847ca" />
 
-```
+**Debug Routing Manager pod issues**
+```bash
 kubectl describe pod deployment-ricplt-rtmgr-677cfb9dd7-zgrqc -n ricplt
 ```
+
 <img width="1564" height="774" alt="Screenshot from 2025-08-22 18-23-45" src="https://github.com/user-attachments/assets/bf7f77c4-fa2a-4e8a-9f06-e8913650a86f" />
 
 ### Platform Pods Status Output
@@ -99,8 +111,8 @@ deployment-ricplt-rtmgr-677cfb9dd7-zgrqc          0/1     ImagePullBackOff   0  
 deployment-ricplt-submgr-7f885656cb-mcgnv         1/1     Running            0             16m
 statefulset-ricplt-dbaas-server-0                 1/1     Running            0             16m
 ```
-<img width="956" height="169" alt="Screenshot from 2025-08-22 20-13-35" src="https://github.com/user-attachments/assets/c171cfb6-279f-4210-9c31-d0b395966b07" />
 
+<img width="956" height="169" alt="Screenshot from 2025-08-22 20-13-35" src="https://github.com/user-attachments/assets/c171cfb6-279f-4210-9c31-d0b395966b07" />
 
 ### Successfully Deployed Core Components
 - ✅ **Application Manager** (deployment-ricplt-appmgr): Running
@@ -110,22 +122,24 @@ statefulset-ricplt-dbaas-server-0                 1/1     Running            0  
 - ⚠️ **Routing Manager**: ImagePullBackOff (private registry access issue)
 - ⚠️ **E2 Termination**: CrashLoopBackOff
 
-***
+---
 
 ## 2. xApp Deployments
 
 ### KPI Monitor xApp
 
 #### Commands Executed
-```
-# Create application structure
-```
+
+**Create xApp directory structure**
+```bash
 mkdir ~/kpi-monitor-xapp
 cd ~/kpi-monitor-xapp
 ```
+
 <img width="524" height="43" alt="Screenshot from 2025-08-22 18-29-07" src="https://github.com/user-attachments/assets/d17b2799-6927-43c9-a8db-dabf99aa128a" />
 
-# Create Python application
+**Create Python application file**
+```bash
 cat > app.py << 'EOF'
 import time
 import json
@@ -149,35 +163,39 @@ if __name__ == "__main__":
     app = KPIMonitorApp()
     app.start()
 EOF
+```
 
 <img width="524" height="43" alt="Screenshot from 2025-08-22 18-29-07" src="https://github.com/user-attachments/assets/c1211655-7928-4f2d-89b0-f50afb5267c9" />
 
-
-# Create Docker configuration
+**Create Docker configuration**
+```bash
 cat > Dockerfile << 'EOF'
 FROM python:3.8-slim
 WORKDIR /app
 COPY app.py .
 CMD ["python", "app.py"]
 EOF
+```
 
 <img width="634" height="115" alt="Screenshot from 2025-08-22 18-31-15" src="https://github.com/user-attachments/assets/9fd839ec-643b-4c13-a993-bc2010b05fb5" />
 
-
-# Create Helm chart structure
-```
+**Create Helm chart structure**
+```bash
 mkdir -p helm/kpi-monitor-xapp/templates
 cat > helm/kpi-monitor-xapp/chart.yaml<<'EOF'
 ```
+
 <img width="946" height="146" alt="Screenshot from 2025-08-22 18-33-53" src="https://github.com/user-attachments/assets/9039cdd6-ea68-4fa8-ba71-7a4a3f180435" />
 
-```
+```bash
 cat >helm/kpi-monitor-xapp/values.yaml<<'EOF'
 cat >helm/kpi-monitor-xapp/templates/deployents.yaml<<'EOF'
 ```
+
 <img width="946" height="146" alt="Screenshot from 2025-08-22 18-33-53" src="https://github.com/user-attachments/assets/01dc76e7-b1ad-4dbe-9073-72a0247b9d1d" />
 
-# Build and deploy
+**Build Docker image and deploy with Helm**
+```bash
 docker build -t kpi-monitor-xapp:latest .
 helm install kpi-monitor helm/kpi-monitor-xapp -n ricplt --create-namespace
 ```
@@ -185,12 +203,15 @@ helm install kpi-monitor helm/kpi-monitor-xapp -n ricplt --create-namespace
 ### Bouncer xApp
 
 #### Commands Executed
+
+**Create second xApp directory**
 ```bash
-# Create second xApp
 mkdir ~/bouncer-xapp
 cd ~/bouncer-xapp
+```
 
-# Create Bouncer application
+**Create Bouncer application file**
+```bash
 cat > bouncer.py << 'EOF'
 import time
 import json
@@ -220,25 +241,31 @@ if __name__ == "__main__":
     app = BouncerApp()
     app.start()
 EOF
-
-# Build and deploy
 ```
+
+**Build and deploy Bouncer xApp**
+```bash
 docker build -t bouncer-xapp:latest .
 helm install bouncer-xapp helm/bouncer-xapp -n ricplt
 ```
+
 <img width="930" height="342" alt="Screenshot from 2025-08-22 20-16-53" src="https://github.com/user-attachments/assets/3606075e-268f-4178-9091-858c1396f504" />
 
-
 ### xApp Resolution Process
-```bash
-# Resolved Docker image access issues using minikube docker-env
-eval "$(minikube docker-env)"
 
-# Rebuilt images within minikube context
+**Set minikube Docker environment**
+```bash
+eval "$(minikube docker-env)"
+```
+
+**Rebuild images within minikube context**
+```bash
 docker build -t kpi-monitor-xapp:latest .
 docker build -t bouncer-xapp:latest .
+```
 
-# Upgraded deployments
+**Upgrade deployments with rebuilt images**
+```bash
 helm upgrade kpi-monitor ~/kpi-monitor-xapp/helm/kpi-monitor-xapp -n ricplt --reuse-values
 helm upgrade bouncer-xapp ~/bouncer-xapp/helm/bouncer-xapp -n ricplt --reuse-values
 ```
@@ -261,21 +288,26 @@ INFO:__main__:Bouncer: Simulating load test - Random latency: 16ms
 ...
 ```
 
-***
+---
 
 ## 3. xApp Onboarder Integration Attempts
 
 ### Commands Executed for xApp Onboarder
-```bash
-# Multiple attempts to install xapp-onboarder
-helm install xapp-onboarder ./xapp-onboarder -n ricplt
 
-# Cleanup operations for conflicting resources
+**Install xApp onboarder**
+```bash
+helm install xapp-onboarder ./xapp-onboarder -n ricplt
+```
+
+**Clean conflicting ConfigMaps**
+```bash
 kubectl delete configmap configmap-ricplt-xapp-onboarder-env -n ricplt
 kubectl delete configmap configmap-ricplt-xapp-onboarder-chartmuseum-env -n ricplt
 helm uninstall xapp-onboarder -n ricplt
+```
 
-# Dependency management attempts
+**Update dependencies and repositories**
+```bash
 helm dependency update ./xapp-onboarder
 helm repo update
 ```
@@ -285,13 +317,14 @@ helm repo update
 - **Issue**: Missing ric-common chart dependency from local repository
 - **Error**: `ric-common chart not found in repo http://localhost:18080/`
 
-***
+---
 
 ## 4. E2 Simulator Integration
 
 ### Commands Executed
-```
-# Search for E2 simulator components
+
+**Search for E2 simulator components**
+```bash
 find ~/ric-dep -name "*e2sim*" -o -name "*simulator*"
 find ~/ric-dep -name "*e2*" -type d | grep -i sim
 ls ~/ric-dep/*/
@@ -302,14 +335,24 @@ ls ~/ric-dep/*/
 - **Available Components**: E2 Manager and E2 Termination deployed as part of platform
 - **Note**: E2 components present but experiencing image pull issues
 
-***
+---
 
 ## 5. Services and Network Status
 
 ### Services Verification Commands
-```
+
+**List all services in ricplt namespace**
+```bash
 kubectl get svc -n ricplt
+```
+
+**Get all resources in ricplt namespace**
+```bash
 kubectl get all -n ricplt
+```
+
+**List all Helm releases**
+```bash
 helm list -n ricplt
 ```
 
@@ -321,13 +364,13 @@ bouncer-xapp  ricplt   3       deployed bouncer-xapp-1.0.0
 kpi-monitor   ricplt   3       deployed kpi-monitor-xapp-1.0.0       
 ```
 
-***
+---
 
 ## 6. Issues Encountered and Resolutions
 
 ### Issue 1: Container Image Access
-**Problem**: ImagePullBackOff for RIC platform components
-**Root Cause**: Private registry `nexus3.o-ran-sc.org:10002` requiring authentication
+**Problem**: ImagePullBackOff for RIC platform components  
+**Root Cause**: Private registry `nexus3.o-ran-sc.org:10002` requiring authentication  
 **Error Messages**: 
 ```
 Failed to pull image "nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1": 
@@ -336,7 +379,7 @@ manifest for nexus3.o-ran-sc.org:10002/o-ran-sc/ric-plt-e2mgr:3.0.1 not found: m
 **Status**: Partial resolution - core services running
 
 ### Issue 2: xApp Image Pull Issues
-**Problem**: Custom xApp images not accessible from minikube
+**Problem**: Custom xApp images not accessible from minikube  
 **Solution Applied**:
 ```bash
 eval "$(minikube docker-env)"
@@ -345,7 +388,7 @@ eval "$(minikube docker-env)"
 **Result**: ✅ Bouncer xApp successfully running
 
 ### Issue 3: Helm Chart Dependencies
-**Problem**: xapp-onboarder installation failing due to missing dependencies
+**Problem**: xapp-onboarder installation failing due to missing dependencies  
 **Commands Used**:
 ```bash
 kubectl delete secret sh.helm.release.v1.xapp-onboarder.v1 -n ricplt
@@ -353,17 +396,20 @@ kubectl get secrets -n ricplt -l owner=helm
 ```
 **Status**: Ongoing dependency resolution needed
 
-***
+---
 
 ## 7. API Testing and Health Checks
 
 ### Health Check Commands Attempted
+
+**Monitor xApp logs**
 ```bash
-# Platform health verification attempts
 kubectl logs -f deployment/bouncer-xapp -n ricplt
 kubectl logs -f deployment/kpi-monitor-xapp -n ricplt
+```
 
-# Service endpoint verification
+**Test Application Manager health endpoint**
+```bash
 kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://localhost:8080/ric/v1/health/ready
 ```
 
@@ -373,7 +419,7 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 - ✅ **Subscription Manager**: Pod running and healthy
 - ✅ **Database Service**: StatefulSet running successfully
 
-***
+---
 
 ## 8. Final Deployment Summary
 
@@ -398,13 +444,6 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 - System monitoring and log analysis
 - Issue resolution and systematic debugging
 
-***
+---
 
 *Screenshots and detailed log outputs are available in the accompanying documentation files.*
-
-***
-
-
-
-
-
