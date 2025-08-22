@@ -74,13 +74,21 @@ ls ~/ric-dep/*/
 - E2-related components present only as part of platform deployment
 
 #### Repository Structure Analysis
-```bash
+
 # Examined directories for potential E2 simulator components
+```
 ls ~/ric-dep/helm/
+```
+<img width="1697" height="56" alt="Screenshot from 2025-08-22 20-41-11" src="https://github.com/user-attachments/assets/c78e1382-bfac-4c83-b9f4-5cf2ce5e3e2a" />
+
 # Output showed: e2mgr, e2term (as platform components)
 
 # Checked for simulator-specific configurations
+```
 ls ~/ric-dep/RECIPE_EXAMPLE/ | grep -i sim
+```
+<img width="817" height="56" alt="Screenshot from 2025-08-22 20-42-30" src="https://github.com/user-attachments/assets/bfba7c8d-3a5e-474c-bda9-2e3ed1a176a5" />
+
 # No simulator-specific recipe files found
 ```
 
@@ -311,4 +319,5 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
 
 ***
+
 
