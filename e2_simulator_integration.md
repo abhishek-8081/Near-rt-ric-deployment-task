@@ -11,9 +11,11 @@ This document outlines the E2 simulator integration attempts during the Near-RT 
 The Near-RT RIC platform deployment included several E2-related components:
 
 #### E2 Manager (E2MGR)
-```bash
+```
 kubectl describe pod deployment-ricplt-e2mgr-6dbf74545f-8w7pd -n ricplt
 ```
+<img width="1594" height="763" alt="Screenshot from 2025-08-22 20-23-10" src="https://github.com/user-attachments/assets/19bcce6d-396a-48f6-b149-e00768f8ca24" />
+
 
 **Component Details:**
 - **Pod Name**: deployment-ricplt-e2mgr-6dbf74545f-8w7pd
@@ -31,9 +33,11 @@ Reason: ImagePullBackOff
 ```
 
 #### E2 Termination (E2TERM)
-```bash
+```
 kubectl describe pod deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl -n ricplt
 ```
+<img width="1181" height="785" alt="Screenshot from 2025-08-22 20-25-27" src="https://github.com/user-attachments/assets/13688a5c-e28d-4815-8747-d17d2d015158" />
+
 
 **Component Details:**
 - **Pod Name**: deployment-ricplt-e2term-alpha-6d6bbc684d-qdchl
@@ -307,3 +311,4 @@ The E2 simulator integration attempt revealed significant challenges primarily r
 **Next Steps**: Obtain proper registry access and identify suitable E2 simulation components for full integration testing.
 
 ***
+
