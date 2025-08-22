@@ -452,5 +452,5 @@ kubectl exec -n ricplt deployment/deployment-ricplt-appmgr -- curl -s http://loc
 
 ---
 
-*Screenshots and detailed log outputs are available in the accompanying documentation files.*
+
 
