@@ -137,6 +137,7 @@ helm uninstall xapp-onboarder -n ricplt || true
 helm dependency update ./xapp-onboarder
 # Error: ric-common chart not found in repo http://localhost:18080/
 ```
+<img width="1290" height="47" alt="Screenshot from 2025-08-22 23-22-23" src="https://github.com/user-attachments/assets/3dfe7707-1727-4bf3-89d5-133af2eefa57" />
 
 **Fix:** Ensure the local chart repository is running or update dependencies from remote.
 
@@ -149,4 +150,5 @@ helm install xapp-onboarder ./xapp-onboarder -n ricplt
 ***
 
 *(Leave space for adding relevant screenshots)*
+
 
