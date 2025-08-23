@@ -149,6 +149,4 @@ helm install xapp-onboarder ./xapp-onboarder -n ricplt
 
 ***
 
-*(Leave space for adding relevant screenshots)*
-
 
