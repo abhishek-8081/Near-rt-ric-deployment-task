@@ -20,7 +20,7 @@ See [xapp_deployment.md](./xapp_deployment.md)
 
 ---
 
-## 3. E2 Simulator Integration (Optional)
+## 3. E2 Simulator Integration (Bonus)
 Documentation on the installation and integration of the E2 simulator with the Near-RT RIC platform including any issues faced.
 
 See [e2_simulator_integration.md](./e2_simulator_integration.md)
