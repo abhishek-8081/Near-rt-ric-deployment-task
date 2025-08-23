@@ -6,16 +6,6 @@ The documentation includes pod and service outputs, API call results, issues enc
 
 ---
 
-## Table of Contents
-
-- [Deployment Outputs](deployment_outputs.md)
-- [xApp Deployment](xapp_deployment.md)
-- [E2 Simulator Integration (Optional)](e2_simulator_integration.md)
-- [Issues and Fixes](issues_and_fixes.md)
-- [Work Progress](work_progress.md)
-
----
-
 ## 1. Deployment Outputs
 This section links to the detailed outputs of kubectl commands related to pods, services, and API calls during the deployment process.
 
